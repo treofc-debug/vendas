@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carrinho - Closet Hunter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="fixed w-full bg-white shadow-sm z-50">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-semibold text-gray-800">Closet Hunter</h1>
+                <div class="hidden md:flex space-x-8">
+                    <a href="index.html#inicio" class="text-gray-600 hover:text-gray-900 transition-colors">Início</a>
+                    <a href="index.html#produtos" class="text-gray-600 hover:text-gray-900 transition-colors">Produtos</a>
+                    <a href="index.html#sobre" class="text-gray-600 hover:text-gray-900 transition-colors">Sobre</a>
+                    <a href="index.html#contato" class="text-gray-600 hover:text-gray-900 transition-colors">Contato</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Cart Section -->
+    <section class="pt-24 pb-12">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-bold text-gray-800 mb-8">Seu Carrinho</h2>
+            
+            <!-- Cart Items -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <div class="lg:col-span-2">
+                    <div id="cart-items" class="space-y-4">
+                        <!-- Cart items will be dynamically inserted here -->
+                        <!-- Example item structure:
+                        <div class="flex items-center bg-white p-4 rounded-lg shadow-sm">
+                            <img src="product-image.jpg" alt="Product Name" class="w-20 h-20 object-cover rounded">
+                            <div class="ml-4 flex-grow">
+                                <h4 class="font-semibold">Product Name</h4>
+                                <p class="text-gray-600">R$ 99,90</p>
+                                <div class="flex items-center mt-2">
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fas fa-minus"></i>
+                                    </button>
+                                    <span class="mx-4">1</span>
+                                    <button class="text-gray-500 hover:text-gray-700">
+                                        <i class="fas fa-plus"></i>
+                                    </button>
+                                    <button class="ml-auto text-red-500 hover:text-red-700">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        -->
+                    </div>
+                </div>
+
+                <!-- Order Summary and Address Form -->
+                <div class="lg:col-span-1">
+                    <div class="bg-white p-6 rounded-lg shadow-sm">
+                        <h3 class="text-xl font-semibold mb-4">Resumo do Pedido</h3>
+                        <div class="space-y-2 mb-4">
+                            <div class="flex justify-between">
+                                <span>Subtotal:</span>
+                                <span id="subtotal">R$ 0,00</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Frete:</span>
+                                <span id="shipping">R$ 0,00</span>
+                            </div>
+                            <div class="flex justify-between font-semibold text-lg">
+                                <span>Total:</span>
+                                <span id="total">R$ 0,00</span>
+                            </div>
+                        </div>
+
+                        <!-- Address Form -->
+                        <form id="address-form" class="space-y-4">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">
+                                    CEP <span class="text-red-500">*</span>
+                                </label>
+                                <input type="text" id="cep" 
+                                    class="mt-1 block w-full rounded-md border-2 border-gray-300 shadow-sm 
+                                    focus:border-gray-500 focus:ring-1 focus:ring-gray-500 
+                                    bg-gray-50 px-3 py-2" 
+                                    required
+                                    placeholder="00000-000">
+                                <p class="text-xs text-gray-500 mt-1">Digite o CEP para autocompletar o endereço</p>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">
+                                    Endereço <span class="text-red-500">*</span>
+                                </label>
+                                <input type="text" id="address" 
+                                    class="mt-1 block w-full rounded-md border-2 border-gray-300 shadow-sm 
+                                    focus:border-gray-500 focus:ring-1 focus:ring-gray-500 
+                                    bg-gray-50 px-3 py-2" 
+                                    required
+                                    placeholder="Rua, Avenida, etc">
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">
+                                        Número <span class="text-red-500">*</span>
+                                    </label>
+                                    <input type="text" id="number" 
+                                        class="mt-1 block w-full rounded-md border-2 border-gray-300 shadow-sm 
+                                        focus:border-gray-500 focus:ring-1 focus:ring-gray-500 
+                                        bg-gray-50 px-3 py-2" 
+                                        required
+                                        placeholder="123">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">
+                                        Complemento
+                                    </label>
+                                    <input type="text" id="complement" 
+                                        class="mt-1 block w-full rounded-md border-2 border-gray-300 shadow-sm 
+                                        focus:border-gray-500 focus:ring-1 focus:ring-gray-500 
+                                        bg-gray-50 px-3 py-2" 
+                                        placeholder="Apto, Sala, etc">
+                                </div>
+                            </div>
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700">
+                                    Bairro <span class="text-red-500">*</span>
+                                </label>
+                                <input type="text" id="neighborhood" 
+                                    class="mt-1 block w-full rounded-md border-2 border-gray-300 shadow-sm 
+                                    focus:border-gray-500 focus:ring-1 focus:ring-gray-500 
+                                    bg-gray-50 px-3 py-2" 
+                                    required
+                                    placeholder="Seu bairro">
+                            </div>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">
+                                        Cidade <span class="text-red-500">*</span>
+                                    </label>
+                                    <input type="text" id="city" 
+                                        class="mt-1 block w-full rounded-md border-2 border-gray-300 shadow-sm 
+                                        focus:border-gray-500 focus:ring-1 focus:ring-gray-500 
+                                        bg-gray-50 px-3 py-2" 
+                                        required
+                                        placeholder="Sua cidade">
+                                </div>
+                                <div>
+                                    <label class="block text-sm font-medium text-gray-700">
+                                        Estado <span class="text-red-500">*</span>
+                                    </label>
+                                    <input type="text" id="state" 
+                                        class="mt-1 block w-full rounded-md border-2 border-gray-300 shadow-sm 
+                                        focus:border-gray-500 focus:ring-1 focus:ring-gray-500 
+                                        bg-gray-50 px-3 py-2" 
+                                        required
+                                        placeholder="UF">
+                                </div>
+                            </div>
+                            <p class="text-sm text-gray-500 mt-2">
+                                <span class="text-red-500">*</span> Campos obrigatórios
+                            </p>
+                        </form>
+
+                        <button onclick="calculateShipping()" class="mt-4 w-full bg-gray-200 text-gray-800 py-2 px-4 rounded-md hover:bg-gray-300 transition-colors">
+                            Calcular Frete
+                        </button>
+
+                        <button onclick="finishPurchase()" class="mt-4 w-full bg-gray-900 text-white py-2 px-4 rounded-md hover:bg-gray-800 transition-colors">
+                            Finalizar Compra
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            }).format(value);
+        }
+
+        // Função para atualizar o estoque no localStorage
+        function updateProductStock(productId, quantityToSubtract) {
+            let products = JSON.parse(localStorage.getItem('products') || '[]');
+            const productIndex = products.findIndex(p => p.id === productId);
+            
+            if (productIndex === -1) {
+                // Se o produto não existe no localStorage, cria um novo
+                products.push({
+                    id: productId,
+                    quantity: getUrlParams().quantity - quantityToSubtract
+                });
+            } else {
+                // Atualiza a quantidade do produto existente
+                products[productIndex].quantity -= quantityToSubtract;
+            }
+            
+            localStorage.setItem('products', JSON.stringify(products));
+            return products[productIndex]?.quantity || 0;
+        }
+
+        // Função para verificar o estoque atual
+        function getCurrentStock(productId) {
+            const products = JSON.parse(localStorage.getItem('products') || '[]');
+            const product = products.find(p => p.id === productId);
+            
+            if (!product) {
+                return parseInt(localStorage.getItem(`initial_stock_${productId}`)) || 0;
+            }
+            
+            return product.quantity;
+        }
+
+        function updateCartUI() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const cartItems = document.getElementById('cart-items');
+            const subtotalElement = document.getElementById('subtotal');
+            const totalElement = document.getElementById('total');
+            
+            cartItems.innerHTML = '';
+            let subtotal = 0;
+
+            cart.forEach(item => {
+                const currentStock = getCurrentStock(item.id);
+                subtotal += item.price * item.quantity;
+                
+                const itemElement = document.createElement('div');
+                itemElement.className = 'flex items-center bg-white p-4 rounded-lg shadow-sm';
+                itemElement.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded">
+                    <div class="ml-4 flex-grow">
+                        <h4 class="font-semibold">${item.name}</h4>
+                        <p class="text-gray-600">${formatCurrency(item.price)}</p>
+                        <div class="flex items-center mt-2">
+                            <button onclick="updateQuantity(${item.id}, -1)" class="text-gray-500 hover:text-gray-700">
+                                <i class="fas fa-minus"></i>
+                            </button>
+                            <span class="mx-4">${item.quantity}</span>
+                            <button onclick="updateQuantity(${item.id}, 1)" 
+                                    class="text-gray-500 hover:text-gray-700"
+                                    ${item.quantity >= currentStock ? 'disabled style="opacity: 0.5; cursor: not-allowed;"' : ''}>
+                                <i class="fas fa-plus"></i>
+                            </button>
+                            <button onclick="removeItem(${item.id})" class="ml-auto text-red-500 hover:text-red-700">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                        <p class="text-sm text-gray-500 mt-1">Disponível: ${currentStock} un</p>
+                    </div>
+                `;
+                cartItems.appendChild(itemElement);
+            });
+
+            subtotalElement.textContent = formatCurrency(subtotal);
+            totalElement.textContent = formatCurrency(subtotal); // Será atualizado quando calcular o frete
+        }
+
+        function updateQuantity(id, change) {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const item = cart.find(item => item.id === id);
+            
+            if (item) {
+                const currentStock = getCurrentStock(item.id);
+                const newQuantity = item.quantity + change;
+                
+                if (newQuantity > currentStock) {
+                    alert(`Quantidade máxima disponível: ${currentStock}`);
+                    return;
+                }
+                
+                item.quantity = Math.max(1, newQuantity);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                updateCartUI();
+            }
+        }
+
+        function removeItem(id) {
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            cart = cart.filter(item => item.id !== id);
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartUI();
+        }
+
+        function calculateShipping() {
+            const cep = document.getElementById('cep').value.replace(/\D/g, '');
+            if (!cep) {
+                alert('Por favor, insira um CEP válido');
+                return;
+            }
+
+            // CEP de referência (05181-000)
+            const referenceCep = '05181000';
+            
+            // Calcula a diferença entre os CEPs para simular distância
+            const cepDiff = Math.abs(parseInt(cep) - parseInt(referenceCep));
+            
+            // Pega os produtos do carrinho para calcular peso
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            // Base do frete: R$ 12,00
+            let shippingCost = 12;
+            
+            // Adiciona custo por distância (baseado na diferença do CEP)
+            if (cepDiff > 100000) { // CEPs muito distantes
+                shippingCost += 8;
+            } else if (cepDiff > 50000) { // CEPs relativamente distantes
+                shippingCost += 5;
+            } else { // CEPs próximos
+                shippingCost += 3;
+            }
+            
+            // Adiciona custo por quantidade de itens
+            shippingCost += totalItems * 2; // R$ 2,00 por item adicional
+
+            document.getElementById('shipping').textContent = formatCurrency(shippingCost);
+
+            const subtotal = parseFloat(document.getElementById('subtotal').textContent.replace('R$', '').replace(',', '.'));
+            document.getElementById('total').textContent = formatCurrency(subtotal + shippingCost);
+            
+            // Mostra estimativa de entrega
+            const estimatedDays = cepDiff > 100000 ? '7 a 10 dias úteis' : 
+                                cepDiff > 50000 ? '5 a 7 dias úteis' : 
+                                '3 a 5 dias úteis';
+            
+            // Atualiza ou cria o elemento de prazo de entrega
+            let deliveryInfo = document.getElementById('delivery-info');
+            if (!deliveryInfo) {
+                deliveryInfo = document.createElement('div');
+                deliveryInfo.id = 'delivery-info';
+                deliveryInfo.className = 'mt-2 text-sm text-gray-600';
+                document.getElementById('shipping').parentNode.parentNode.appendChild(deliveryInfo);
+            }
+            deliveryInfo.textContent = `Prazo de entrega estimado: ${estimatedDays}`;
+        }
+
+        function finishPurchase() {
+            const form = document.getElementById('address-form');
+            if (!form.checkValidity()) {
+                alert('Por favor, preencha todos os campos obrigatórios');
+                return;
+            }
+
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            // Verifica se há itens no carrinho
+            if (cart.length === 0) {
+                alert('Seu carrinho está vazio!');
+                return;
+            }
+
+            // Verifica e atualiza o estoque de cada item
+            let canPurchase = true;
+            let stockUpdateOperations = [];
+
+            cart.forEach(item => {
+                const currentStock = getCurrentStock(item.id);
+                if (currentStock < item.quantity) {
+                    alert(`Desculpe, o produto "${item.name}" não tem estoque suficiente. Disponível: ${currentStock}`);
+                    canPurchase = false;
+                    return;
+                }
+                stockUpdateOperations.push({
+                    id: item.id,
+                    quantity: item.quantity
+                });
+            });
+
+            if (!canPurchase) {
+                return;
+            }
+
+            // Atualiza o estoque de todos os produtos
+            stockUpdateOperations.forEach(operation => {
+                const newStock = updateProductStock(operation.id, operation.quantity);
+                console.log(`Estoque atualizado - Produto ID ${operation.id}: ${newStock} unidades restantes`);
+            });
+
+            // Limpa o carrinho
+            localStorage.setItem('cart', '[]');
+            
+            // Feedback para o usuário
+            alert('Compra finalizada com sucesso! Obrigado pela preferência.');
+            
+            // Redireciona para a página inicial
+            window.location.href = 'index.html';
+        }
+
+        // Buscar endereço pelo CEP
+        document.getElementById('cep').addEventListener('blur', function() {
+            const cep = this.value.replace(/\D/g, '');
+            if (cep.length === 8) {
+                fetch(`https://viacep.com.br/ws/${cep}/json/`)
+                    .then(response => response.json())
+                    .then(data => {
+                        if (!data.erro) {
+                            document.getElementById('address').value = data.logradouro;
+                            document.getElementById('neighborhood').value = data.bairro;
+                            document.getElementById('city').value = data.localidade;
+                            document.getElementById('state').value = data.uf;
+                        }
+                    });
+            }
+        });
+
+        // Inicializar a página
+        document.addEventListener('DOMContentLoaded', updateCartUI);
+    </script>
+</body>
+</html> 

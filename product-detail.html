@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Produto - Closet Hunter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .animate-pulse-slow {
+            animation: pulse 2s infinite;
+        }
+        .thumbnail {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .thumbnail:hover {
+            opacity: 0.8;
+        }
+        .thumbnail.active {
+            border: 2px solid #1a1a1a;
+        }
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: #ef4444;
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        /* Estilos personalizados */
+        .product-image {
+            width: 100%;
+            height: 600px;
+            object-fit: cover;
+            border-radius: 0.5rem;
+        }
+
+        /* Estilo para o contador de quantidade */
+        input[type="number"]::-webkit-inner-spin-button,
+        input[type="number"]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        /* Estilo para o botão de favoritos */
+        .fa-heart:hover {
+            color: #ef4444;
+            transition: color 0.2s;
+        }
+
+        /* Estilo para as avaliações */
+        .fa-star {
+            font-size: 1rem;
+        }
+
+        /* Animação para o feedback de adição ao carrinho */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .bg-green-600 {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="fixed w-full bg-white shadow-sm z-50">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-semibold text-gray-800">Closet Hunter</h1>
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="index.html#inicio" class="text-gray-600 hover:text-gray-900 transition-colors">Início</a>
+                    <a href="index.html#produtos" class="text-gray-600 hover:text-gray-900 transition-colors">Produtos</a>
+                    <a href="index.html#sobre" class="text-gray-600 hover:text-gray-900 transition-colors">Sobre</a>
+                    <a href="index.html#contato" class="text-gray-600 hover:text-gray-900 transition-colors">Contato</a>
+                    <a href="cart.html" class="relative text-gray-600 hover:text-gray-900 transition-colors">
+                        <i class="fas fa-shopping-cart text-xl"></i>
+                        <span id="cart-count" class="cart-count hidden">0</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Product Detail Section -->
+    <section class="pt-24 pb-12">
+        <div class="container mx-auto px-20">
+            <div class="flex flex-col md:flex-row items-start">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <!-- Main Image -->
+                    <img id="main-image" src="" alt="" class="product-image rounded-lg shadow-lg w-full mb-4">
+                    <!-- Thumbnails -->
+                    <div id="thumbnails" class="grid grid-cols-3 gap-2">
+                        <!-- Thumbnails will be inserted here by JavaScript -->
+                    </div>
+                </div>
+                <div class="md:w-1/2 md:pl-8">
+                    <div class="flex items-center gap-2 mb-2">
+                        <h2 class="text-3xl font-bold text-gray-800"></h2>
+                        <span class="text-gray-500">•</span>
+                        <span class="text-gray-500">blazers</span>
+                    </div>
+
+                    <!-- Avaliações -->
+                    <div class="flex items-center gap-2 mb-4">
+                        <div class="flex items-center">
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-yellow-400"></i>
+                            <i class="fas fa-star text-gray-300"></i>
+                        </div>
+                        <span class="text-gray-500">(23 avaliações)</span>
+                    </div>
+
+                    <!-- Preço -->
+                    <div class="mb-6">
+                        <div class="flex items-center gap-3">
+                            <span class="text-2xl font-bold text-blue-700" id="current-price">R$ </span>
+                            <span class="text-gray-500 line-through" id="original-price">R$ </span>
+                        </div>
+                    </div>
+
+                    <!-- Informações do Produto -->
+                    <div class="grid grid-cols-2 gap-x-8 gap-y-4 mb-6">
+                        <div>
+                            <span class="text-gray-600">Tamanho:</span>
+                            <span class="font-semibold ml-2" id="product-size">M</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">Estado:</span>
+                            <span class="font-semibold ml-2" id="product-condition">Excelente</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">Material:</span>
+                            <span class="font-semibold ml-2" id="product-material"></span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">Disponibilidade:</span>
+                            <span class="font-semibold ml-2" id="product-availability"></span>
+                        </div>
+                    </div>
+
+                    <!-- Quantidade e Botão -->
+                    <div class="flex items-center gap-4" id="purchase-controls">
+                        <div class="flex items-center border-2 border-gray-300 rounded-lg">
+                            <button onclick="updateQuantity(-1)" class="px-4 py-2 text-gray-600 hover:text-gray-800">-</button>
+                            <input type="number" id="quantity" value="1" min="1" class="w-12 text-center border-0 focus:ring-0" readonly>
+                            <button onclick="updateQuantity(1)" class="px-4 py-2 text-gray-600 hover:text-gray-800">+</button>
+                        </div>
+                        <button onclick="addToCart()" class="flex-1 bg-gray-900 text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors flex items-center justify-center gap-2">
+                            <i class="fas fa-shopping-cart"></i>
+                            Adicionar ao Carrinho
+                        </button>
+                        <button class="p-3 border-2 border-gray-300 rounded-lg hover:border-gray-400 transition-colors">
+                            <i class="fas fa-heart text-gray-600"></i>
+                        </button>
+                    </div>
+
+                    <!-- Mensagem de Produto Esgotado -->
+                    <div id="out-of-stock-message" class="hidden bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-4">
+                        <strong class="font-bold">Produto Esgotado!</strong>
+                        <p class="block sm:inline">Este produto não está mais disponível para compra.</p>
+                    </div>
+
+                    <!-- Benefícios -->
+                    <div class="grid grid-cols-3 gap-4 mt-8">
+                        <div class="flex items-center justify-center text-center">
+                            <div>
+                                <i class="fas fa-truck text-green-600 text-xl mb-2"></i>
+                                <p class="text-sm text-gray-600">Frete Grátis acima de R$ 100</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-center text-center">
+                            <div>
+                                <i class="fas fa-shield-alt text-green-600 text-xl mb-2"></i>
+                                <p class="text-sm text-gray-600">Compra Segura</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center justify-center text-center">
+                            <div>
+                                <i class="fas fa-sync text-green-600 text-xl mb-2"></i>
+                                <p class="text-sm text-gray-600">7 dias para trocar</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-xl font-semibold mb-2">Closet Hunter</h3>
+                    <p class="text-gray-400">Moda sustentável para todos</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-instagram text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-facebook text-2xl"></i>
+                    </a>
+                    <a href="https://wa.me/5511999999999" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-whatsapp text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-gray-400">
+                <p>Contato: (11) 99999-9999</p>
+                <p>Email: contato@closethunter.com.br</p>
+                <p class="mt-4">&copy; 2024 Closet Hunter. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Função para formatar preço em reais
+        function formatPrice(price) {
+            return new Intl.NumberFormat('pt-BR', {
+                style: 'currency',
+                currency: 'BRL'
+            }).format(price);
+        }
+
+        // Função para atualizar o estoque no localStorage
+        function updateProductStock(productId, quantityToSubtract) {
+            let products = JSON.parse(localStorage.getItem('products') || '[]');
+            const productIndex = products.findIndex(p => p.id === productId);
+            const initialStock = parseInt(localStorage.getItem(`initial_stock_${productId}`)) || 0;
+            
+            if (productIndex === -1) {
+                // Se o produto não existe no localStorage, cria um novo
+                products.push({
+                    id: productId,
+                    quantity: initialStock - quantityToSubtract
+                });
+            } else {
+                // Atualiza a quantidade do produto existente
+                products[productIndex].quantity -= quantityToSubtract;
+            }
+            
+            localStorage.setItem('products', JSON.stringify(products));
+            return products[productIndex]?.quantity || 0;
+        }
+
+        // Função para verificar o estoque atual
+        function getCurrentStock(productId) {
+            const products = JSON.parse(localStorage.getItem('products') || '[]');
+            const product = products.find(p => p.id === productId);
+            
+            if (!product) {
+                return parseInt(localStorage.getItem(`initial_stock_${productId}`)) || 0;
+            }
+            
+            return product.quantity;
+        }
+
+        // Função para atualizar o contador do carrinho
+        function updateCartCount() {
+            const cart = JSON.parse(localStorage.getItem('cart')) || [];
+            const count = cart.reduce((total, item) => total + item.quantity, 0);
+            const cartCount = document.getElementById('cart-count');
+            if (cartCount) {
+                if (count > 0) {
+                    cartCount.textContent = count;
+                    cartCount.classList.remove('hidden');
+                } else {
+                    cartCount.classList.add('hidden');
+                }
+            }
+        }
+
+        // Função para atualizar a quantidade
+        function updateQuantity(change) {
+            const params = getUrlParams();
+            const quantityInput = document.getElementById('quantity');
+            const currentValue = parseInt(quantityInput.value);
+            const currentStock = getCurrentStock(params.id);
+            const newValue = Math.max(1, Math.min(currentValue + change, currentStock));
+            quantityInput.value = newValue;
+        }
+
+        // Função para adicionar ao carrinho
+        function addToCart() {
+            const params = getUrlParams();
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const mainImage = document.getElementById('main-image');
+            
+            // Verifica o estoque atual
+            const currentStock = getCurrentStock(params.id);
+            
+            // Verifica se há quantidade suficiente em estoque
+            if (quantity > currentStock) {
+                alert(`Quantidade solicitada não disponível em estoque. Disponível: ${currentStock}`);
+                return;
+            }
+            
+            const item = {
+                id: params.id,
+                name: params.name,
+                price: params.price,
+                image: mainImage.src || params.image,
+                quantity: quantity
+            };
+
+            let cart = JSON.parse(localStorage.getItem('cart')) || [];
+            
+            const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
+            
+            if (existingItemIndex > -1) {
+                // Verifica se a nova quantidade total não excede o estoque
+                const newTotalQuantity = cart[existingItemIndex].quantity + quantity;
+                if (newTotalQuantity > currentStock) {
+                    alert(`A quantidade total no carrinho excederia o estoque disponível. Disponível: ${currentStock}`);
+                    return;
+                }
+                cart[existingItemIndex].quantity = newTotalQuantity;
+            } else {
+                cart.push(item);
+            }
+
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateCartCount();
+
+            // Feedback visual para o usuário
+            const addButton = document.querySelector('button[onclick="addToCart()"]');
+            const originalText = addButton.innerHTML;
+            addButton.innerHTML = '<i class="fas fa-check"></i> Adicionado!';
+            addButton.classList.add('bg-green-600');
+            
+            setTimeout(() => {
+                addButton.innerHTML = originalText;
+                addButton.classList.remove('bg-green-600');
+            }, 2000);
+        }
+
+        // Função para obter parâmetros da URL
+        function getUrlParams() {
+            const params = new URLSearchParams(window.location.search);
+            const imageParam = decodeURIComponent(params.get('image') || '');
+            const imagesParam = params.get('images');
+            let images = [];
+            
+            try {
+                images = imagesParam ? JSON.parse(decodeURIComponent(imagesParam)) : [];
+            } catch (e) {
+                console.error('Erro ao processar imagens:', e);
+                images = [];
+            }
+
+            // Se não houver imagens mas tiver imagem principal, usa ela como única imagem
+            if (images.length === 0 && imageParam) {
+                images = [imageParam];
+            }
+            
+            const id = parseInt(params.get('id')) || Date.now();
+            const quantity = parseInt(params.get('quantity')) || 0;
+            
+            // Salva o estoque inicial se ainda não existir
+            if (!localStorage.getItem(`initial_stock_${id}`)) {
+                localStorage.setItem(`initial_stock_${id}`, quantity.toString());
+            }
+            
+            return {
+                id: id,
+                name: decodeURIComponent(params.get('name') || 'Produto não encontrado'),
+                price: parseFloat(params.get('price')) || 0,
+                image: imageParam || 'https://via.placeholder.com/400x600?text=Imagem+não+disponível',
+                description: decodeURIComponent(params.get('description') || ''),
+                material: decodeURIComponent(params.get('material') || 'Poliéster e Elastano'),
+                size: decodeURIComponent(params.get('size') || 'M'),
+                condition: decodeURIComponent(params.get('condition') || 'Excelente'),
+                quantity: getCurrentStock(id),
+                images: images.length > 0 ? images : [imageParam || 'https://via.placeholder.com/400x600?text=Imagem+não+disponível']
+            };
+        }
+
+        // Função para atualizar a imagem principal
+        function updateMainImage(imageUrl) {
+            const mainImage = document.getElementById('main-image');
+            if (mainImage && imageUrl) {
+                mainImage.src = imageUrl;
+                mainImage.setAttribute('data-original', imageUrl);
+                
+                // Adiciona tratamento de erro para a imagem
+                mainImage.onerror = function() {
+                    this.src = 'https://via.placeholder.com/400x600?text=Imagem+não+disponível';
+                    this.alt = 'Imagem não disponível';
+                };
+            }
+        }
+
+        // Inicializar a página
+        document.addEventListener('DOMContentLoaded', () => {
+            const params = getUrlParams();
+            
+            // Atualiza o título da página
+            document.title = `${params.name} - Closet Hunter`;
+            
+            // Atualiza o título e categoria do produto
+            const titleElement = document.querySelector('.text-3xl');
+            if (titleElement) {
+                titleElement.textContent = params.name;
+            }
+            
+            // Atualiza os preços
+            const currentPrice = document.getElementById('current-price');
+            const originalPrice = document.getElementById('original-price');
+            
+            if (currentPrice && params.price) {
+                currentPrice.textContent = formatPrice(params.price);
+            }
+            
+            if (originalPrice && params.price) {
+                originalPrice.textContent = formatPrice(params.price * 1.4);
+            }
+            
+            // Atualiza informações do produto
+            const materialElement = document.getElementById('product-material');
+            const sizeElement = document.getElementById('product-size');
+            const conditionElement = document.getElementById('product-condition');
+            const availabilityElement = document.getElementById('product-availability');
+            
+            if (materialElement) {
+                materialElement.textContent = params.material;
+            }
+            
+            if (sizeElement) {
+                sizeElement.textContent = params.size;
+            }
+
+            if (conditionElement) {
+                conditionElement.textContent = params.condition;
+            }
+
+            if (availabilityElement) {
+                const currentStock = getCurrentStock(params.id);
+                if (currentStock > 0) {
+                    availabilityElement.textContent = `${currentStock} unidade${currentStock > 1 ? 's' : ''} em estoque`;
+                    availabilityElement.className = 'font-semibold ml-2 text-green-600';
+                } else {
+                    availabilityElement.textContent = 'Esgotado';
+                    availabilityElement.className = 'font-semibold ml-2 text-red-600';
+                    
+                    // Mostra mensagem de produto esgotado
+                    const outOfStockMessage = document.getElementById('out-of-stock-message');
+                    const purchaseControls = document.getElementById('purchase-controls');
+                    
+                    if (outOfStockMessage) outOfStockMessage.classList.remove('hidden');
+                    if (purchaseControls) purchaseControls.classList.add('hidden');
+                }
+            }
+            
+            // Atualiza a imagem principal e miniaturas
+            const mainImage = document.getElementById('main-image');
+            const thumbnailsContainer = document.getElementById('thumbnails');
+            
+            if (params.images && params.images.length > 0) {
+                // Usa a primeira imagem do array como imagem principal
+                if (mainImage) {
+                    mainImage.src = params.images[0];
+                    mainImage.alt = params.name;
+                    mainImage.setAttribute('data-original', params.images[0]);
+                    
+                    // Adiciona tratamento de erro para a imagem principal
+                    mainImage.onerror = function() {
+                        this.src = 'https://via.placeholder.com/400x600?text=Imagem+não+disponível';
+                        this.alt = 'Imagem não disponível';
+                    };
+                }
+
+                // Atualiza as miniaturas
+                if (thumbnailsContainer) {
+                    thumbnailsContainer.innerHTML = '';
+                    params.images.forEach((imageUrl, index) => {
+                        if (!imageUrl) return; // Pula imagens vazias
+                        
+                        const thumbnail = document.createElement('img');
+                        thumbnail.src = imageUrl;
+                        thumbnail.alt = `${params.name} - Imagem ${index + 1}`;
+                        thumbnail.className = `thumbnail rounded w-full h-20 object-cover cursor-pointer ${
+                            index === 0 ? 'active border-2 border-gray-800' : ''
+                        }`;
+                        
+                        // Adiciona tratamento de erro para as miniaturas
+                        thumbnail.onerror = function() {
+                            this.src = 'https://via.placeholder.com/400x600?text=Imagem+não+disponível';
+                            this.alt = 'Miniatura não disponível';
+                        };
+                        
+                        thumbnail.onclick = () => {
+                            updateMainImage(imageUrl);
+                            document.querySelectorAll('.thumbnail').forEach(thumb => 
+                                thumb.classList.remove('active', 'border-2', 'border-gray-800')
+                            );
+                            thumbnail.classList.add('active', 'border-2', 'border-gray-800');
+                        };
+                        thumbnailsContainer.appendChild(thumbnail);
+                    });
+                }
+            }
+
+            // Inicializa o contador do carrinho
+            updateCartCount();
+        });
+    </script>
+</body>
+</html> 

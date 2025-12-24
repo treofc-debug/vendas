@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closet Hunter</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        .animate-pulse-slow {
+            animation: pulse 2s infinite;
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <header class="fixed w-full bg-white shadow-sm z-50">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <h1 class="text-2xl font-semibold text-gray-800">Closet Hunter</h1>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#inicio" class="text-gray-600 hover:text-gray-900 transition-colors">Início</a>
+                    <a href="#produtos" class="text-gray-600 hover:text-gray-900 transition-colors">Produtos</a>
+                    <a href="#sobre" class="text-gray-600 hover:text-gray-900 transition-colors">Sobre</a>
+                    <a href="#contato" class="text-gray-600 hover:text-gray-900 transition-colors">Contato</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="inicio" class="pt-24 pb-12">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0">
+                    <h2 class="text-4xl md:text-5xl font-bold text-gray-800 mb-4">Garimpe moda com propósito</h2>
+                    <p class="text-gray-600 mb-8">Moda sustentável e acessível para você expressar sua personalidade.</p>
+                    <a href="https://wa.me/5511999999999" target="_blank" 
+                       class="inline-block bg-gray-900 text-white px-8 py-3 rounded-lg hover:bg-gray-800 transition-colors animate-pulse-slow">
+                        Comprar agora
+                    </a>
+                </div>
+                <div class="md:w-1/2">
+                    <img src="https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?ixlib=rb-4.0.3" 
+                         alt="Roupas em cabide" 
+                         class="rounded-lg shadow-lg w-full">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="produtos" class="py-12 bg-white">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl font-semibold text-gray-800 mb-8 text-center">Nossos Produtos</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Product Card 1 -->
+                <div class="product-card bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <a href="#" class="block relative">
+                        <img src="https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixlib=rb-4.0.3" 
+                             alt="Jaqueta Vintage" 
+                             class="w-full h-64 object-cover">
+                        <div class="product-images hidden">
+                            https://images.unsplash.com/photo-1434389677669-e08b4cac3105?ixlib=rb-4.0.3,
+                            https://images.unsplash.com/photo-1551028719-00167b16eac5?ixlib=rb-4.0.3,
+                            https://images.unsplash.com/photo-1544022613-e87ca75a784a?ixlib=rb-4.0.3
+                        </div>
+                        <div class="product-details hidden">
+                            <span class="material">Algodão e Poliéster</span>
+                            <span class="size">M</span>
+                            <span class="condition">Excelente</span>
+                            <span class="quantity">2</span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Jaqueta Vintage</h3>
+                            <p class="text-gray-600">R$ 89,90</p>
+                            <p class="product-description hidden">Uma jaqueta vintage de alta qualidade perfeita para qualquer ocasião.</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-sm text-gray-600">Disponível: 2 un</span>
+                                <span class="text-sm text-green-600">Em estoque</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!-- Product Card 2 -->
+                <div class="product-card bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <a href="#" class="block relative">
+                        <img src="https://i.postimg.cc/y69nmKNB/camiseta-test-4.png" 
+                             alt="Calça Jeans" 
+                             class="w-full h-64 object-cover">
+                        <div class="absolute top-0 right-0 bg-red-500 text-white px-4 py-1 rounded-bl">
+                            Esgotado
+                        </div>
+                        <div class="product-images hidden">
+                            https://i.postimg.cc/y69nmKNB/camiseta-test-4.png,
+                            https://images.unsplash.com/photo-1541099649105-f69ad21f3246?ixlib=rb-4.0.3,
+                            https://i.postimg.cc/y69nmKNB/camiseta-test-4.png
+                        </div>
+                        <div class="product-details hidden">
+                            <span class="material">Jeans</span>
+                            <span class="size">38</span>
+                            <span class="condition">Excelente</span>
+                            <span class="quantity">0</span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Calça Jeans</h3>
+                            <p class="text-gray-600">R$ 69,90</p>
+                            <p class="product-description hidden">Calça jeans confortável e estilosa para o dia a dia.</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-sm text-gray-600">Disponível: 0 un</span>
+                                <span class="text-sm text-red-600">Esgotado</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!-- Product Card 3 -->
+                <div class="product-card bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <a href="#" class="block relative">
+                        <img src="https://images.unsplash.com/photo-1516762689617-e1cffcef479d?ixlib=rb-4.0.3" 
+                             alt="Vestido Casual" 
+                             class="w-full h-64 object-cover">
+                        <div class="product-images hidden">
+                            https://images.unsplash.com/photo-1516762689617-e1cffcef479d?ixlib=rb-4.0.3,
+                            https://images.unsplash.com/photo-1515372039744-b8f02a3ae446?ixlib=rb-4.0.3,
+                            https://images.unsplash.com/photo-1496747611176-843222e1e57c?ixlib=rb-4.0.3
+                        </div>
+                        <div class="product-details hidden">
+                            <span class="material">Viscose</span>
+                            <span class="size">P</span>
+                            <span class="condition">Excelente</span>
+                            <span class="quantity">5</span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Vestido Casual</h3>
+                            <p class="text-gray-600">R$ 79,90</p>
+                            <p class="product-description hidden">Vestido casual elegante para ocasiões especiais.</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-sm text-gray-600">Disponível: 5 un</span>
+                                <span class="text-sm text-green-600">Em estoque</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <!-- Product Card 4 -->
+                <div class="product-card bg-gray-50 rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+                    <a href="#" class="block relative">
+                        <img src="https://images.unsplash.com/photo-1516762689617-e1cffcef479d?ixlib=rb-4.0.3" 
+                             alt="relogio" 
+                             class="w-full h-64 object-cover">
+                        <div class="product-images hidden">
+                            https://images.unsplash.com/photo-1516762689617-e1cffcef479d?ixlib=rb-4.0.3,
+                            https://images.unsplash.com/photo-1524805444758-089113d48a6d?ixlib=rb-4.0.3,
+                            https://images.unsplash.com/photo-1542496658-e33a6d0d50f6?ixlib=rb-4.0.3
+                        </div>
+                        <div class="product-details hidden">
+                            <span class="material">Aço Inoxidável</span>
+                            <span class="size">Único</span>
+                            <span class="condition">Excelente</span>
+                            <span class="quantity">1</span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold text-gray-800">Relógio</h3>
+                            <p class="text-gray-600">R$ 79,90</p>
+                            <p class="product-description hidden">Relógio casual elegante para ocasiões especiais.</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <span class="text-sm text-gray-600">Disponível: 1 un</span>
+                                <span class="text-sm text-green-600">Em estoque</span>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <button class="bg-gray-200 text-gray-800 px-8 py-3 rounded-lg hover:bg-gray-300 transition-colors">
+                    Ver mais
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="sobre" class="py-12 bg-gray-50">
+        <div class="container mx-auto px-6">
+            <div class="max-w-2xl mx-auto text-center">
+                <h2 class="text-3xl font-semibold text-gray-800 mb-4">Sobre Nós</h2>
+                <p class="text-gray-600">
+                    O Closet Hunter nasceu da paixão por moda sustentável e da crença de que cada peça de roupa tem uma história única para contar. Nosso brechó oferece uma coleção cuidadosamente selecionada de peças vintage e contemporâneas, promovendo o consumo consciente e a moda circular.
+                </p>
+            </div>
+        </div>
+        <div class="container mx-auto px-6">
+            <div class="max-w-2xl mx-auto text-center">
+                <p class="text-gray-600">
+                    Cada item que escolhemos passa por um rigoroso processo de curadoria, garantindo qualidade, estilo e autenticidade. Além de contribuir para um futuro mais sustentável, você encontra peças exclusivas que expressam sua personalidade única.
+                </p>
+            </div>
+        </div>
+
+        <!-- Icons Section -->
+        <div class="container mx-auto px-6 py-12">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+                <!-- Sustainability Icon -->
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-leaf text-4xl text-gray-800 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-800">Sustentabilidade</h3>
+                    <p class="text-gray-600">Reduzindo o impacto ambiental através da moda circular</p>
+                </div>
+                <!-- Curation Icon -->
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-heart text-4xl text-gray-800 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-800">Curadoria</h3>
+                    <p class="text-gray-600">Peças selecionadas com cuidado e paixão pela moda</p>
+                </div>
+                <!-- History Icon -->
+                <div class="flex flex-col items-center">
+                    <i class="fas fa-history text-4xl text-gray-800 mb-4"></i>
+                    <h3 class="text-xl font-semibold text-gray-800">História</h3>
+                    <p class="text-gray-600">Cada peça carrega uma história única e especial</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contato" class="bg-gray-900 text-white py-8">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 md:mb-0">
+                    <h3 class="text-xl font-semibold mb-2">Closet Hunter</h3>
+                    <p class="text-gray-400">Moda sustentável para todos</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-instagram text-2xl"></i>
+                    </a>
+                    <a href="#" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-facebook text-2xl"></i>
+                    </a>
+                    <a href="https://wa.me/5511999999999" class="text-gray-400 hover:text-white transition-colors">
+                        <i class="fab fa-whatsapp text-2xl"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-8 text-center text-gray-400">
+                <p>Contato: (11) 99999-9999</p>
+                <p>Email: contato@closethunter.com.br</p>
+                <p class="mt-4">&copy; 2024 Closet Hunter. Todos os direitos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Função para verificar o estoque atual
+        function getCurrentStock(productId) {
+            const products = JSON.parse(localStorage.getItem('products') || '[]');
+            const product = products.find(p => p.id === productId);
+            
+            if (!product) {
+                return parseInt(localStorage.getItem(`initial_stock_${productId}`)) || 0;
+            }
+            
+            return product.quantity;
+        }
+
+        // Função para gerar os links dos produtos dinamicamente
+        document.addEventListener('DOMContentLoaded', function() {
+            const productCards = document.querySelectorAll('.product-card');
+            
+            productCards.forEach(card => {
+                const link = card.querySelector('a');
+                const name = card.querySelector('h3').textContent;
+                const price = card.querySelector('.text-gray-600').textContent.replace('R$ ', '');
+                const mainImage = card.querySelector('img').src;
+                const images = card.querySelector('.product-images').textContent.trim().split(',').map(url => url.trim());
+                const description = card.querySelector('.product-description').textContent;
+                
+                // Detalhes do produto
+                const details = card.querySelector('.product-details');
+                const material = details.querySelector('.material').textContent;
+                const size = details.querySelector('.size').textContent;
+                const condition = details.querySelector('.condition').textContent;
+                const initialQuantity = parseInt(details.querySelector('.quantity').textContent);
+                
+                // Gera um ID único para o produto se não existir
+                const productId = Date.now() + Math.floor(Math.random() * 1000);
+                
+                // Salva o estoque inicial se ainda não existir
+                if (!localStorage.getItem(`initial_stock_${productId}`)) {
+                    localStorage.setItem(`initial_stock_${productId}`, initialQuantity.toString());
+                }
+                
+                // Obtém a quantidade atual do estoque
+                const currentQuantity = getCurrentStock(productId);
+
+                // Atualiza a exibição da quantidade
+                const availabilitySpan = card.querySelector('.text-sm.text-gray-600');
+                if (availabilitySpan) {
+                    availabilitySpan.textContent = `Disponível: ${currentQuantity} un`;
+                }
+
+                // Atualiza o status do estoque
+                const stockStatusSpan = card.querySelector('.text-sm.text-green-600, .text-sm.text-red-600');
+                if (stockStatusSpan) {
+                    if (currentQuantity > 0) {
+                        stockStatusSpan.textContent = 'Em estoque';
+                        stockStatusSpan.className = 'text-sm text-green-600';
+                    } else {
+                        stockStatusSpan.textContent = 'Esgotado';
+                        stockStatusSpan.className = 'text-sm text-red-600';
+                    }
+                }
+
+                // Se o produto estiver esgotado, desabilita o link
+                if (currentQuantity === 0) {
+                    link.style.pointerEvents = 'none';
+                    link.style.opacity = '0.7';
+                    
+                    // Adiciona ou atualiza o badge de esgotado
+                    let outOfStockBadge = card.querySelector('.absolute.top-0.right-0');
+                    if (!outOfStockBadge) {
+                        outOfStockBadge = document.createElement('div');
+                        outOfStockBadge.className = 'absolute top-0 right-0 bg-red-500 text-white px-4 py-1 rounded-bl';
+                        outOfStockBadge.textContent = 'Esgotado';
+                        link.appendChild(outOfStockBadge);
+                    }
+                    return;
+                }
+                
+                const href = `product-detail.html?id=${encodeURIComponent(productId)}` +
+                    `&name=${encodeURIComponent(name)}` +
+                    `&price=${encodeURIComponent(price)}` +
+                    `&image=${encodeURIComponent(mainImage)}` +
+                    `&images=${encodeURIComponent(JSON.stringify(images))}` +
+                    `&description=${encodeURIComponent(description)}` +
+                    `&material=${encodeURIComponent(material)}` +
+                    `&size=${encodeURIComponent(size)}` +
+                    `&condition=${encodeURIComponent(condition)}` +
+                    `&quantity=${encodeURIComponent(currentQuantity)}`;
+                
+                link.href = href;
+            });
+        });
+    </script>
+</body>
+</html> 
